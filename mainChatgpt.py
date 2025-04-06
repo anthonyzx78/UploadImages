@@ -2,7 +2,7 @@ import os
 import time
 from os import walk
 from tkinter import Tk
-from tkinter.filedialog import askdirectory
+from tkinter.filedialog import askdirectory, askopenfile
 
 import undetected_chromedriver as uc
 from selenium.webdriver.chrome.service import Service
@@ -22,7 +22,9 @@ def seleccionar_carpeta():
     return carpeta
 
 def iniciar_driver():
-    service = Service(executable_path="chromedriver.exe")
+    Tk().withdraw()
+    driverFile = askopenfile(title='Selecciona el driver')
+    service = Service(executable_path=driverFile)
     driver = uc.Chrome(service=service)
     return driver
 
